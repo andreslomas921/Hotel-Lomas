@@ -1,0 +1,6 @@
+{
+  "name": "Hotel Lomas",
+  "description": "Landing page interactiva de hotel con panel de administración integrado para gestionar las habitaciones, disponibilidad, precios y características en tiempo real y persistencia en localStorage.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
