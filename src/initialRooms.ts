@@ -3,65 +3,115 @@ import { Room } from "./types";
 export const INITIAL_ROOMS: Room[] = [
   {
     id: "room-1",
-    name: "Master Suite Terraza y Jacuzzi",
+    name: "EXCLUSIVE MATRIMONIAL",
     category: "Deluxe",
-    price: 240,
+    price: 18,
     priceNote: "/ noche",
-    description: "Nuestra habitación más exclusiva. Disfruta de un diseño minimalista y cálido con detalles en madera noble, una amplia terraza privada con jacuzzi exterior y vistas inigualables al amanecer.",
-    services: ["Wi-Fi de alta velocidad", "Agua caliente permanente", "Parqueadero privado gratis", "Atención 24 Horas", "Mini Bar para huéspedes", "Videovigilancia de seguridad"],
-    features: ["Cama King Size de lino", "Jacuzzi climatizado privado", "Cafetera Espresso", "Proyector de cine inteligente"],
+    description: "Nuestra habitación más exclusiva. Disfruta de un diseño de confort y elegancia en nuestra Habitación Exclusive Matrimonial, diseñada para brindar el máximo descanso en pareja.",
+    services: [
+      "Wi-Fi de alta velocidad",
+      "Servicio a la habitación 24/7",
+      "Desayuno Premium buffet",
+      "Mini bar libre"
+    ],
+    features: [
+      "Cama King Size de lino",
+      "cafetera",
+      "pantalla plasma"
+    ],
     isFeatured: true,
     isAvailable: true,
     image: "https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=800&q=80"
   },
   {
     id: "room-2",
-    name: "Suite Familiar Vista al Mar",
-    category: "Familiar",
-    price: 185,
+    name: "COMFORT SIMPLE",
+    category: "Estándar",
+    price: 13,
     priceNote: "/ noche",
-    description: "El espacio perfecto para viajar en familia o con amigos. Con dos ambientes conectados y una terraza espaciosa frente al océano, ofrece toda la tranquilidad y el confort que necesitan.",
-    services: ["Wi-Fi de alta velocidad", "Agua caliente permanente", "Parqueadero privado gratis", "Atención 24 Horas", "Servicio rápido de lavandería", "Videovigilancia de seguridad", "Mini Bar para huéspedes"],
-    features: ["1 Cama King + 2 Camas Twin", "Cocina equipada", "Baño con tina de hidromasaje", "Balcón con comedor exterior"],
+    description: "Diseñada para brindar comodidad, funcionalidad y descanso, nuestra Habitación Simple es la elección ideal para viajeros que buscan una estancia placentera en un espacio acogedor y moderno.",
+    services: [
+      "Wi-Fi gratis",
+      "Estacionamiento privado",
+      "Limpieza diaria",
+      "Televisores inteligentes"
+    ],
+    features: [
+      "Cama Individual de algodón",
+      "Escritorio moderno",
+      "Lámpara de lectura"
+    ],
     isFeatured: true,
     isAvailable: true,
     image: "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=800&q=80"
   },
   {
     id: "room-3",
-    name: "Habitación Studio Premium",
-    category: "Estándar",
-    price: 110,
+    name: "COMFORT DOBLE",
+    category: "Especializado",
+    price: 22,
     priceNote: "/ noche",
-    description: "Diseñada para el viajero de negocios continuo o parejas que buscan eficiencia y comodidad elegante. Iluminación inteligente regulable, escritorio ergonómico de trabajo y baño de mármol.",
-    services: ["Wi-Fi de alta velocidad", "Agua caliente permanente", "Parqueadero privado gratis", "Atención 24 Horas", "Servicio rápido de lavandería", "Mini Bar para huéspedes"],
-    features: ["Cama Queen con almohadas de pluma", "Área de trabajo dedicada", "Ducha efecto lluvia", "Altavoz inteligente Bluetooth"],
-    isFeatured: false,
+    description: "Diseñada para quienes buscan compartir una estancia cómoda sin renunciar al confort, nuestra Habitación Doble ofrece un espacio amplio y acogedor, ideal para amigos, colegas o parejas del viaje.",
+    services: [
+      "Wi-Fi ultrarrápido",
+      "Café de especialidad incluido"
+    ],
+    features: [
+      "Área de trabajo dedicada",
+      "Dos camas Twin confortables",
+      "Ducha efecto lluvia"
+    ],
+    isFeatured: true,
     isAvailable: true,
     image: "https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=800&q=80"
   },
   {
     id: "room-4",
-    name: "Penthouse Suite Imperial",
-    category: "Deluxe",
-    price: 420,
+    name: "COMFORT TRIPLE",
+    category: "Familiar",
+    price: 32,
     priceNote: "/ noche",
-    description: "Viva el máximo esplendor en nuestro ático superior. Ofrece 150 metros cuadrados de pura sofisticación, salón comedor integrado, piano de media cola, chimenea de diseño y las vistas más altas del Resort.",
-    services: ["Wi-Fi de alta velocidad", "Agua caliente permanente", "Parqueadero privado gratis", "Atención 24 Horas", "Servicio rápido de lavandería", "Videovigilancia de seguridad", "Mini Bar completo de uso libre"],
-    features: ["Cama California King", "Chimenea ecológica", "Bar privado equipado", "Baño spa de vapor"],
-    isFeatured: true,
+    description: "El espacio perfecto para viajar en familia o con amigos. Con tres acogedoras camas y amplios ambientes compartidos en una ubicación privilegiada del complejo.",
+    services: [
+      "Wi-Fi de alta velocidad",
+      "Agua caliente permanente",
+      "Parqueadero privado gratis",
+      "Atención 24 Horas",
+      "Servicio rápido de lavandería",
+      "Videovigilancia de seguridad",
+      "Mini Bar para huéspedes"
+    ],
+    features: [
+      "1 Cama de dos plazas + 2 Camas Twin de algodón",
+      "Cocina equipada",
+      "Baño con tina de hidromasaje",
+      "Balcón con comedor exterior"
+    ],
+    isFeatured: false,
     isAvailable: true,
     image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=800&q=80"
   },
   {
     id: "room-5",
-    name: "Eco-Bungalow Oasis",
-    category: "Especial",
-    price: 160,
+    name: "COMFORT SUITE DELUXE",
+    category: "Deluxe",
+    price: 45,
     priceNote: "/ noche",
-    description: "Rodeado por un santuario tropical de plantas nativas y con acceso directo a una piscina de arena natural. Construido respetando el entorno con materiales sustentables y acabados artesanales.",
-    services: ["Wi-Fi de alta velocidad", "Agua caliente permanente", "Parqueadero privado gratis", "Atención 24 Horas", "Videovigilancia de seguridad", "Mini Bar para huéspedes"],
-    features: ["Cama Queen Premium", "Ducha al aire libre (Privada)", "Ventilación bioclimática", "Hamacas de macramé"],
+    description: "Rodeado por un santuario tropical de plantas nativas y con un diseño de confort, ofrece un entorno inigualable y las mayores comodidades para toda su estadía.",
+    services: [
+      "Wi-Fi de alta velocidad",
+      "Agua caliente permanente",
+      "Parqueadero privado gratis",
+      "Atención 24 Horas",
+      "Videovigilancia de seguridad",
+      "Mini Bar y refrigerio premium"
+    ],
+    features: [
+      "Cama Queen Premium",
+      "Ducha al aire libre (Privada)",
+      "Ventilación bioclimática",
+      "Hamacas de macramé"
+    ],
     isFeatured: false,
     isAvailable: true,
     image: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=800&q=80"

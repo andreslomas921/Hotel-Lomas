@@ -77,7 +77,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                     className="flex items-center gap-2 bg-[#d7c9b0]/20 hover:bg-[#d7c9b0]/40 text-[#5a503d] border border-[#d7c9b0]/60 px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-300 cursor-pointer focus:outline-none"
                     id="btn-go-admin-direct"
                   >
-                    <CalendarRange className="h-3.5 w-3.5" /> Panel Admin
+                    <CalendarRange className="h-3.5 w-3.5" /> Login Admin
                   </button>
                   <button
                     onClick={onLogout}
@@ -93,7 +93,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   className="flex items-center gap-2 bg-[#1e1e1c] hover:bg-[#8c826e] text-[#faf9f6] px-5 py-2.5 rounded-full text-xs font-semibold uppercase tracking-widest transition-all duration-300 shadow-md hover:shadow-lg cursor-pointer focus:outline-none"
                   id="btn-admin-login"
                 >
-                  <ShieldAlert className="h-3.5 w-3.5 text-[#d7c9b0]" /> Panel Admin
+                  <ShieldAlert className="h-3.5 w-3.5 text-[#d7c9b0]" /> Login Admin
                 </button>
               )
             ) : (

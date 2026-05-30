@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { X, ShieldCheck, Lock, User, AlertCircle, KeyRound } from "lucide-react";
+import { X, ShieldCheck, Lock, User, AlertCircle } from "lucide-react";
 
 interface LoginModalProps {
   onClose: () => void;
@@ -24,12 +24,6 @@ export const LoginModal: React.FC<LoginModalProps> = ({ onClose, onLoginSuccess 
     }
   };
 
-  const fillDemoCreds = () => {
-    setUsername("admin");
-    setPassword("172839al");
-    setError("");
-  };
-
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm" id="login-modal-overlay">
       <div className="bg-[#faf9f6] rounded-2xl w-full max-w-md border border-[#e2dfd5] shadow-2xl overflow-hidden transition-all duration-300">
@@ -50,7 +44,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({ onClose, onLoginSuccess 
         </div>
 
         {/* Content Form */}
-        <form onSubmit={handleSubmit} className="p-6 space-y-4">
+        <form onSubmit={handleSubmit} autoComplete="off" className="p-6 space-y-4">
           <div className="text-center pb-2">
             <p className="text-xs text-neutral-500">
               Ingrese credenciales autorizadas del establecimiento para editar tarifas, registrar reservas y configurar la visibilidad general.
@@ -73,9 +67,10 @@ export const LoginModal: React.FC<LoginModalProps> = ({ onClose, onLoginSuccess 
               <input
                 type="text"
                 className="w-full pl-9 pr-4 py-2.5 rounded-lg border border-neutral-300 focus:border-[#8c826e] text-sm focus:outline-none bg-white transition-all text-neutral-800"
-                placeholder="Escriba usuario de administración (admin)"
+                placeholder="Escriba usuario de administración"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
+                autoComplete="off"
                 required
               />
             </div>
@@ -90,25 +85,13 @@ export const LoginModal: React.FC<LoginModalProps> = ({ onClose, onLoginSuccess 
               <input
                 type="password"
                 className="w-full pl-9 pr-4 py-2.5 rounded-lg border border-neutral-300 focus:border-[#8c826e] text-sm focus:outline-none bg-white transition-all text-neutral-800"
-                placeholder="Introduzca contraseña (172839al)"
+                placeholder="Introduzca contraseña"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                autoComplete="new-password"
                 required
               />
             </div>
-          </div>
-
-          {/* Preset trigger for testing convenience */}
-          <div className="py-2 flex items-center justify-between border-t border-b border-dashed border-neutral-200">
-            <span className="text-[10px] text-neutral-400 font-mono">Prueba Rápida de Credenciales:</span>
-            <button
-              type="button"
-              onClick={fillDemoCreds}
-              className="inline-flex items-center gap-1 bg-[#8c826e]/10 hover:bg-[#8c826e]/20 text-[#5a503d] px-3 py-1 rounded text-[10px] font-bold uppercase tracking-wide transition-all cursor-pointer focus:outline-none"
-              id="btn-fill-demo"
-            >
-              <KeyRound className="h-3 w-3" /> Auto-completar
-            </button>
           </div>
 
           <button

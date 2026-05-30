@@ -415,7 +415,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
             </div>
 
             <p className="text-[#8c826e] text-xs font-mono tracking-wide leading-relaxed">
-              * Nota a Administradores de Hotel: Para configurar nuevas suites, modificar los precios expuestos en el escaparate o suspender disponibilidad del portal, acceda al panel pulsando sobre "Panel Admin" o la consola administrativa rápida del menú.
+              * Nota a Administradores de Hotel: Para configurar nuevas suites, modificar los precios expuestos en el escaparate o suspender disponibilidad del portal, acceda al panel pulsando sobre "Login Admin" o la consola administrativa rápida del menú.
             </p>
 
             <div className="pt-4">

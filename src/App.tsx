@@ -22,20 +22,20 @@ export default function App() {
 
   // 1. Initial State Data Retrieval from client-side localStorage
   useEffect(() => {
-    const savedRooms = localStorage.getItem("nomada_rooms");
+    const savedRooms = localStorage.getItem("lomas_rooms");
     if (savedRooms) {
       try {
         setRooms(JSON.parse(savedRooms));
       } catch (e) {
         setRooms(INITIAL_ROOMS);
-        localStorage.setItem("nomada_rooms", JSON.stringify(INITIAL_ROOMS));
+        localStorage.setItem("lomas_rooms", JSON.stringify(INITIAL_ROOMS));
       }
     } else {
       setRooms(INITIAL_ROOMS);
-      localStorage.setItem("nomada_rooms", JSON.stringify(INITIAL_ROOMS));
+      localStorage.setItem("lomas_rooms", JSON.stringify(INITIAL_ROOMS));
     }
 
-    const savedBookings = localStorage.getItem("nomada_bookings");
+    const savedBookings = localStorage.getItem("lomas_bookings");
     if (savedBookings) {
       try {
         setBookings(JSON.parse(savedBookings));
@@ -44,7 +44,7 @@ export default function App() {
       }
     }
 
-    const savedLogged = localStorage.getItem("nomada_admin_logged");
+    const savedLogged = localStorage.getItem("lomas_admin_logged");
     if (savedLogged === "true") {
       setIsAdminLoggedIn(true);
     }
@@ -53,24 +53,24 @@ export default function App() {
   // 2. Real-time Save Helper for persistence
   const saveRoomsToStorage = (updatedRooms: Room[]) => {
     setRooms(updatedRooms);
-    localStorage.setItem("nomada_rooms", JSON.stringify(updatedRooms));
+    localStorage.setItem("lomas_rooms", JSON.stringify(updatedRooms));
   };
 
   const saveBookingsToStorage = (updatedBookings: Booking[]) => {
     setBookings(updatedBookings);
-    localStorage.setItem("nomada_bookings", JSON.stringify(updatedBookings));
+    localStorage.setItem("lomas_bookings", JSON.stringify(updatedBookings));
   };
 
   // 3. Admin Credentials handler
   const handleLoginSuccess = () => {
     setIsAdminLoggedIn(true);
-    localStorage.setItem("nomada_admin_logged", "true");
+    localStorage.setItem("lomas_admin_logged", "true");
     setCurrentView("admin"); // Take authenticated user straight to the Administrative cockpit
   };
 
   const handleLogout = () => {
     setIsAdminLoggedIn(false);
-    localStorage.removeItem("nomada_admin_logged");
+    localStorage.removeItem("lomas_admin_logged");
     setCurrentView("landing"); // Return to standard landing layout
   };
 
