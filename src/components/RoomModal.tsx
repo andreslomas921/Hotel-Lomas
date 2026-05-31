@@ -26,6 +26,10 @@ export const RoomModal: React.FC<RoomModalProps> = ({ room, onClose, onSave }) =
   const [description, setDescription] = useState("");
   const [image, setImage] = useState("");
   
+  // Gallery state
+  const [images, setImages] = useState<string[]>([]);
+  const [newImageUrl, setNewImageUrl] = useState("");
+  
   // Tag lists
   const [services, setServices] = useState<string[]>([]);
   const [features, setFeatures] = useState<string[]>([]);
@@ -45,6 +49,7 @@ export const RoomModal: React.FC<RoomModalProps> = ({ room, onClose, onSave }) =
       setPriceNote(room.priceNote || "/ noche");
       setDescription(room.description);
       setImage(room.image);
+      setImages(room.images || (room.image ? [room.image] : []));
       setServices(room.services || []);
       setFeatures(room.features || []);
       setIsFeatured(room.isFeatured);
@@ -57,6 +62,7 @@ export const RoomModal: React.FC<RoomModalProps> = ({ room, onClose, onSave }) =
       setPriceNote("/ noche");
       setDescription("");
       setImage(SAMPLE_IMAGES[0].url);
+      setImages([SAMPLE_IMAGES[0].url]);
       setServices(["Wi-Fi gratis", "Desayuno buffet", "Servicio integral"]);
       setFeatures(["Cama matrimonial", "Aire acondicionado", "Baño privado"]);
       setIsFeatured(false);
@@ -88,10 +94,44 @@ export const RoomModal: React.FC<RoomModalProps> = ({ room, onClose, onSave }) =
     setFeatures(features.filter((f) => f !== feat));
   };
 
+  const handleAddImage = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const url = newImageUrl.trim();
+    if (url && !images.includes(url)) {
+      setImages([...images, url]);
+      setNewImageUrl("");
+    }
+  };
+
+  const handleRemoveImage = (index: number) => {
+    const updated = images.filter((_, i) => i !== index);
+    setImages(updated);
+    if (index === 0 && updated.length > 0) {
+      setImage(updated[0]);
+    }
+  };
+
+  const handleSelectPreset = (url: string) => {
+    setImage(url);
+    if (!images.includes(url)) {
+      setImages([url, ...images.filter((img) => img !== url)]);
+    } else {
+      // Move it to first position since it's now primary
+      setImages([url, ...images.filter((img) => img !== url)]);
+    }
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!name.trim()) return alert("Por favor escriba un nombre.");
     
+    // De-duplicate and ensure primary cover 'image' is always the first item
+    const cleanPrimary = image.trim() || SAMPLE_IMAGES[0].url;
+    const finalImagesList = [
+      cleanPrimary,
+      ...images.filter((img) => img.trim() && img.trim() !== cleanPrimary)
+    ].filter(Boolean);
+
     const savedRoom: Room = {
       id: room ? room.id : "room-" + Math.random().toString(36).substring(2, 9),
       name: name.trim(),
@@ -99,7 +139,8 @@ export const RoomModal: React.FC<RoomModalProps> = ({ room, onClose, onSave }) =
       price: Number(price) || 0,
       priceNote: priceNote.trim() || "/ noche",
       description: description.trim(),
-      image: image.trim() || SAMPLE_IMAGES[0].url,
+      image: cleanPrimary,
+      images: finalImagesList,
       services: services,
       features: features,
       isFeatured: isFeatured,
@@ -234,7 +275,7 @@ export const RoomModal: React.FC<RoomModalProps> = ({ room, onClose, onSave }) =
             <div className="space-y-4">
               <div className="space-y-1.5">
                 <label className="block text-xs font-semibold text-neutral-700 uppercase tracking-wider">
-                  URL de Imagen de Habitación
+                  URL de Imagen de Portada (Principal)
                 </label>
                 <div className="relative">
                   <ImageIcon className="absolute left-3 top-2.5 h-4 w-4 text-neutral-400" />
@@ -243,7 +284,13 @@ export const RoomModal: React.FC<RoomModalProps> = ({ room, onClose, onSave }) =
                     className="w-full pl-9 pr-4 py-2 rounded-lg border border-neutral-300 focus:border-[#8c826e] focus:outline-none bg-white text-sm text-neutral-800"
                     placeholder="https://..."
                     value={image}
-                    onChange={(e) => setImage(e.target.value)}
+                    onChange={(e) => {
+                      const val = e.target.value;
+                      setImage(val);
+                      if (val && !images.includes(val)) {
+                        setImages([val, ...images]);
+                      }
+                    }}
                   />
                 </div>
               </div>
@@ -256,15 +303,84 @@ export const RoomModal: React.FC<RoomModalProps> = ({ room, onClose, onSave }) =
                     <button
                       key={img.label}
                       type="button"
-                      onClick={() => setImage(img.url)}
-                      className={`h-11 rounded-lg overflow-hidden border-2 relative cursor-pointer ${
-                        image === img.url ? "border-[#8c826e] scale-105" : "border-transparent"
+                      onClick={() => handleSelectPreset(img.url)}
+                      className={`h-11 rounded-lg overflow-hidden border-2 relative cursor-pointer transition-all ${
+                        image === img.url ? "border-[#8c826e] scale-105" : "border-transparent opacity-80 hover:opacity-100"
                       }`}
                       title={img.label}
                     >
                       <img src={img.url} alt={img.label} className="w-full h-full object-cover" />
                     </button>
                   ))}
+                </div>
+                <p className="text-[9px] text-neutral-400 italic leading-tight">* Al pulsar un preset rápido se establece como portada e ingresa a la galería.</p>
+              </div>
+
+              {/* Multiple Images Gallery Grid */}
+              <div className="space-y-3 pt-1">
+                <div className="flex justify-between items-center">
+                  <label className="block text-xs font-semibold text-neutral-700 uppercase tracking-wider">
+                    Galería de Múltiples Fotos (Ángulos)
+                  </label>
+                  <span className="text-[10px] text-neutral-400 font-mono">({images.length} fotos)</span>
+                </div>
+                
+                {/* Add Custom URL to images array */}
+                <div className="flex gap-2">
+                  <input
+                    type="text"
+                    className="flex-1 px-3 py-1.5 rounded-lg border border-neutral-300 focus:border-[#8c826e] focus:outline-none bg-white text-xs text-neutral-800"
+                    placeholder="Escriba o pegue URL de otra imagen"
+                    value={newImageUrl}
+                    onChange={(e) => setNewImageUrl(e.target.value)}
+                  />
+                  <button
+                    type="button"
+                    onClick={handleAddImage}
+                    className="bg-[#d7c9b0] text-[#1e1e1c] hover:bg-[#8c826e] hover:text-white px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center justify-center"
+                  >
+                    <Plus className="h-4 w-4" />
+                  </button>
+                </div>
+
+                {/* Thumbnails of currently stored list in gallery */}
+                <div className="grid grid-cols-4 gap-2 p-2 bg-neutral-100/60 border border-neutral-200 rounded-xl max-h-40 overflow-y-auto">
+                  {images.map((imgUrl, index) => (
+                    <div key={index} className="relative group/thumb aspect-video rounded-lg overflow-hidden border border-neutral-200 bg-white shadow-xs">
+                      <img src={imgUrl} alt={`Vista ${index}`} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+                      
+                      {/* Badge if it is the primary cover */}
+                      {imgUrl === image ? (
+                        <span className="absolute bottom-1 left-1 bg-[#1e1e1c] text-white text-[8px] font-bold uppercase tracking-wider px-1 py-0.5 rounded-sm z-10 scale-90">
+                          Portada
+                        </span>
+                      ) : (
+                        <button
+                          type="button"
+                          onClick={() => setImage(imgUrl)}
+                          className="absolute bottom-1 left-1 bg-[#8c826e] hover:bg-[#1e1e1c] text-white text-[8px] font-semibold uppercase tracking-wider px-1 py-0.5 rounded-sm z-10 opacity-0 group-hover/thumb:opacity-100 transition-opacity focus:opacity-100 cursor-pointer scale-90"
+                          title="Fijar como portada principal"
+                        >
+                          Usar Portada
+                        </button>
+                      )}
+
+                      {/* Remove image icon */}
+                      <button
+                        type="button"
+                        onClick={() => handleRemoveImage(index)}
+                        className="absolute top-1 right-1 p-0.5 bg-black/60 rounded-full text-white/80 hover:text-red-400 opacity-0 group-hover/thumb:opacity-100 transition-opacity focus:opacity-100 cursor-pointer"
+                        title="Eliminar de galería"
+                      >
+                        <X className="h-3.5 w-3.5" />
+                      </button>
+                    </div>
+                  ))}
+                  {images.length === 0 && (
+                    <div className="col-span-4 text-center py-4 text-xs text-neutral-400">
+                      No hay fotos en galería. Añada alguna o pulse los presets rápidos.
+                    </div>
+                  )}
                 </div>
               </div>
 

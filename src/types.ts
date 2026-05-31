@@ -10,6 +10,7 @@ export interface Room {
   isFeatured: boolean;
   isAvailable: boolean;
   image: string;
+  images?: string[];
 }
 
 export interface Booking {

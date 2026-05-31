@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Room } from "../types";
 import { Star, ShieldAlert, BadgeCheck, Compass, Sparkles, SlidersHorizontal, ArrowRight, Utensils, Waves, MoonStar, Coffee, Wifi, Flame, Car, Clock, Shirt, Camera, GlassWater, Phone } from "lucide-react";
+import { RoomImageCarousel } from "./RoomImageCarousel";
 
 interface LandingPageProps {
   rooms: Room[];
@@ -185,15 +186,10 @@ export const LandingPage: React.FC<LandingPageProps> = ({
               >
                 {/* Room Image Container */}
                 <div className="relative h-64 overflow-hidden group">
-                  <img
-                    src={room.image}
-                    alt={room.name}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60" />
+                  <RoomImageCarousel images={room.images && room.images.length > 0 ? room.images : [room.image]} altText={room.name} />
 
                   {/* Badges Overlay */}
-                  <div className="absolute top-4 left-4 flex flex-col gap-1.5 items-start">
+                  <div className="absolute top-4 left-4 flex flex-col gap-1.5 items-start z-10">
                     <span className="bg-[#1e1e1c]/95 text-[#faf9f6] px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest backdrop-blur-sm">
                       {room.category}
                     </span>
@@ -205,7 +201,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
                   </div>
 
                   {/* Price Overlay */}
-                  <div className="absolute bottom-4 right-4 bg-[#faf9f6] px-4 py-2 rounded-xl shadow-lg border border-[#e2dfd5]">
+                  <div className="absolute bottom-4 right-4 bg-[#faf9f6] px-4 py-2 rounded-xl shadow-lg border border-[#e2dfd5] z-10">
                     <div className="flex items-baseline gap-0.5">
                       <span className="text-lg font-bold text-[#1e1e1c] font-mono">${room.price} USD</span>
                       <span className="text-[10px] text-neutral-500 font-sans">{room.priceNote}</span>
@@ -402,13 +398,13 @@ export const LandingPage: React.FC<LandingPageProps> = ({
                 </a>
 
                 <a 
-                  href="tel:+5939999139878" 
+                  href="tel:+593999139878" 
                   className="flex items-center gap-2.5 p-3 rounded-xl bg-neutral-50 hover:bg-amber-50 border border-neutral-100 hover:border-amber-200 text-neutral-800 hover:text-amber-700 font-bold text-sm transition-all focus:outline-none"
                 >
                   <Phone className="h-4 w-4 text-amber-600 shrink-0" />
                   <div className="text-left">
                     <span className="block text-[9px] font-mono text-neutral-400 font-normal uppercase">Atención General</span>
-                    +593 999 913 9878
+                    +593 999 139 878
                   </div>
                 </a>
               </div>
