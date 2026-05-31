@@ -379,7 +379,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
               DÓNDE EL DISEÑO DE AUTOR SE UNE DE FORMA NATURAL CON EL SILENCIO
             </h2>
             <p className="text-neutral-600 text-sm leading-relaxed font-light">
-              Nuestros arquitectos diseñaron el complejo con un solo fin en mente: que cada suite se integrase de manera natural sin impactar el bosque nativo circundante. Maderas sustentables certificadas, reciclaje de aguas residuales para riego y paneles solares alimentan el 90% de las necesidades del complejo.
+              Descubra un espacio donde la comodidad, la atención personalizada y la seguridad se unen para ofrecer una experiencia de hospedaje superior. Nuestras habitaciones han sido diseñadas para garantizar descanso, privacidad y bienestar, con servicios exclusivos.
             </p>
 
             {/* CONTACT NUMBERS AREA */}
@@ -409,10 +409,6 @@ export const LandingPage: React.FC<LandingPageProps> = ({
                 </a>
               </div>
             </div>
-
-            <p className="text-[#8c826e] text-xs font-mono tracking-wide leading-relaxed">
-              * Nota a Administradores de Hotel: Para configurar nuevas suites, modificar los precios expuestos en el escaparate o suspender disponibilidad del portal, acceda al panel pulsando sobre "Login Admin" o la consola administrativa rápida del menú.
-            </p>
 
             <div className="pt-4">
               <button
